@@ -473,9 +473,14 @@
     </div>
 
     <script>
-        // Set launch date (30 days from now)
-        const launchDate = new Date();
-        launchDate.setDate(launchDate.getDate() + 30);
+        // Set launch date to August 10th
+        const currentYear = new Date().getFullYear();
+        let launchDate = new Date(currentYear, 7, 10); // Month is 0-indexed, so 7 = August
+
+        // If August 10th has already passed this year, set it to next year
+        if (launchDate.getTime() < new Date().getTime()) {
+            launchDate = new Date(currentYear + 1, 7, 10);
+        }
 
         function updateCountdown() {
             const now = new Date().getTime();
